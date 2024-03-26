@@ -1,0 +1,26 @@
+#col1{
+    height: 665px;
+    background-image: url("https://www.technewsworld.com/wp-content/uploads/sites/3/2023/06/smart-home-future.jpg");
+    background-size: cover;
+      background-repeat:no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+  }
+  #cont{
+    margin-top: 5cm;
+    background-color: white;
+    opacity: 0.7;
+    border-radius: 0.2cm;
+    width: 10cm;
+  }
+  #description{
+    text-align: justify;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  
+  }
+  #span{
+    background-color: #009434;
+    border-color: #00AF3D;
+    color: white;
+  }

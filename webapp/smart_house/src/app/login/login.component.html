@@ -1,0 +1,21 @@
+<div class="row align-items-center">
+    <div id="col1" class="col">
+        <div class="container" id="cont">
+            <label id="description">Please Sign in to use our features</label>
+        </div>
+    </div>
+    <div class="col">
+        <h3>SMART HOUSE </h3>
+        <div class="input-group mb-3">
+            <span id="span" class="input-group-text">Username</span>
+            <input #username type="text" aria-label="Color" class="form-control">
+        </div>
+        <div class="input-group mb-3">
+            <span id="span" class="input-group-text">Password</span>
+            <input #password type="password" aria-label="Color" class="form-control">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> <!----Action buttons-->
+            <button id="span" class="btn btn-primary" type="button" (click)="onLogin(username.value, password.value )"  >Log In</button>
+        </div>
+    </div>
+</div>
