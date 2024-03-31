@@ -7,20 +7,23 @@ lib =ctypes.CDLL('./libhello.so')
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200')
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:4200') #2000 puerto del app
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
+default_user={
+    "username": "emp@tec.cr",
+    "password": "$2b$10$4VaJV0rjgtg6/AxbGuZkgeWudjn3RF3GSZNBRx7FDx15Z8EYGcNje"
 
+}
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
-
-    if username == default_user.user:
-        if bcrypt.checkpw(password.encode('utf-8'), default_user.password.encode('utf-8')):
+    if username == default_user['username']:
+        if bcrypt.checkpw(password.encode('utf-8'), default_user['password'].encode('utf-8')):
             return jsonify({'mensaje': 'acceso permitido'}), 200
         else:
             return 'acceso denegado contrasenia incorrecta', 401
