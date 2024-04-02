@@ -67,11 +67,33 @@ export class LightsComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
-  changelights(i:number){
+  getDoorStatus(){
+    this.webService.get_door_status().subscribe(data =>{
+      this.doors = data
+    })
+  }
+
+  getCorrectIndex(i:number){
+    if (i ==0){
+      return this.changelights(i,2)
+    }else if(i == 1){
+      return this.changelights(i,3)
+    }else if(i == 2){
+      return this.changelights(i,4)
+    }else if(i == 3){
+      return this.changelights(i,17)
+    }else{
+      return this.changelights(i,27)
+    }
+  }
+
+  changelights(i:number, pin:number){
     if (this.lights[i].status=="off"){
       this.lights[i].status="on";
+      this.webService.change_light({'id':pin, 'value':1})
     }else{
       this.lights[i].status="off";
+      this.webService.change_light({'id':pin, 'value':0})
     }
   }
 }

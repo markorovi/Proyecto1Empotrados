@@ -17,7 +17,7 @@ export class CamComponent implements OnInit{
 
     setInterval(()=>{
       this.getImage();
-    },1000)
+    },3000)
   }
   goBack(){
     this.router.navigateByUrl("home");
