@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import bcrypt
+import hashlib
 import ctypes
 import  base64
 app = Flask(__name__)
@@ -15,9 +15,14 @@ def after_request(response):
     return response
 default_user={
     "username": "emp@tec.cr",
-    "password": "$2b$10$4VaJV0rjgtg6/AxbGuZkgeWudjn3RF3GSZNBRx7FDx15Z8EYGcNje"
-
+    "password": "49c195bce80e52ab0a8acaf126a6ec7e28bb061eda4aa01e0c6b68139ab5b863"
 }
+def encryptar(password):
+    password_bytes = password.encode('utf-8')
+    hash_object = hashlib.sha256()
+    hash_object.update(password_bytes)
+    hashed_password = hash_object.hexdigest()
+    return hashed_password
 @app.route('/cam', methods=['GET'])
 def getImage():
     with open("image.jpg", "rb") as image:
@@ -29,7 +34,7 @@ def login():
     username = data.get('username')
     password = data.get('password')
     if username == default_user['username']:
-        if bcrypt.checkpw(password.encode('utf-8'), default_user['password'].encode('utf-8')):
+        if encryptar(password) == default_user['password']:
             return jsonify({'mensaje': 'acceso permitido'}), 200
         else:
             return 'acceso denegado contrasenia incorrecta', 401
