@@ -1,0 +1,53 @@
+<div class="row align-items-center">
+    <div id = "col2" class="col">
+        <div class="container" id="cont">
+            <label id="description">Welcome to SmartHome Control Hub
+                Take command of your smart home's lighting and security with ease. Our intuitive platform lets you control lights and doors remotely, personalize settings, and ensure peace of mind. Experience convenience and safety at your fingertips with our SmartHome Control Hub.</label>
+
+            <a id="button" class="btn btn-primary btn-sm "  role="button" (click)="goback()">Go back </a>
+        </div>
+    </div>
+    <div id="col1" class="col">
+        <div class="row align-items-center">
+            <h1>
+                Lights Control
+              </h1>
+            <table id="table1" class="table">
+                <thead>
+                  <tr id="head">
+                    <th scope="col">Place</th>
+                    <th scope="col">status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let light of lights; let i = index">
+                        <td>{{light.place}}</td>
+                        <td>{{light.status}}</td>
+                        <td><a id="button" class="btn btn-primary btn-sm "  role="button" (click)="changelights(i)">Turn On </a></td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="row align-items-center">
+            <h1 id="label1">
+                Doors Control
+              </h1>
+            <table id="table2" class="table">
+                <thead id="head">
+                  <tr>
+                    <th scope="col">Place</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      <tr *ngFor="let door of doors">
+                          <td>{{door.place}}</td>
+                          <td>{{door.status}}</td>
+                      </tr>
+                </tbody>
+              </table>
+        </div>
+
+    </div>
+</div>

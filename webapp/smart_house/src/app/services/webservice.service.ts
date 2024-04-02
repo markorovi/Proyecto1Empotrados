@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginI } from '../models/login-i';
-import { ResponseI } from '../models/response-i';
+import { LoginInterface } from '../models/login-interface';
+import { ResponseInterface } from '../models/response-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class WebserviceService {
   url:string = "http://localhost:3000/";
   loginpath:string = this.url + "login";
 
-  login(form: LoginI){
-    return this.http.post<ResponseI>(this.loginpath,form);
+  login(form: LoginInterface){
+    return this.http.post<ResponseInterface>(this.loginpath,form);
   }
 }

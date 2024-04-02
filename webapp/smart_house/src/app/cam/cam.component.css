@@ -1,0 +1,62 @@
+#cont{
+    margin-top: 3cm;
+    margin-bottom: 3.3cm;
+    background-color: white;
+    opacity: 0.7;
+    border-radius: 0.2cm;
+    width: 10cm;
+    align-items: center ;
+    text-align: center;
+    font-size: large;
+  }
+
+  #col1{
+    height: 665px;
+    
+  }
+  #col2{
+    height: 665px;
+    background-image: url("https://a1garage.com/wp-content/uploads/2023/11/The-Evolution-of-Smart-Homes-copy.jpg");
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+
+  }
+  #row1{
+    height: 340px;
+  }
+  #row2{
+    height: 340px;
+  }
+  #table1{
+    margin-top: 20px;
+    text-align: center;
+    width: 600px;
+    background-color: white;
+  /*background-color:#8A288D;*/
+    opacity: 0.9;
+    color: black;
+    margin-left: 40px;
+    
+  }
+  #head{
+    background: #00AF3D;
+  }
+  #button{
+    background-color: #00AF3D;
+    border-color: #00AF3D;
+  }
+  #table2{
+    text-align: center;
+    width: 600px;
+    background-color: white;
+  /*background-color:#8A288D;*/
+    opacity: 0.9;
+    color: black;
+    margin-top: 15px;
+    margin-left: 40px;
+  }
+  #label1{
+    margin-top: 10px;
+  }

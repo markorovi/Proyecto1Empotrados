@@ -33,13 +33,13 @@ app.post('/login', (req,res)=>{
         //Algoritmo de encriptación
         bcrypt.compare(password,default_user.password, (err, result)=>{
             if(result){
-                res.status(200).json({mensaje:"acceso permitido"});
+                res.status(200).json({status: "200",response:"acceso permitido"});
             }else{
-                res.status(401).send("acceso denegado contraseña incorrecta");
+                res.status(401).json({status: "401",response:"acceso denegado contraseña mal"});
             }
         });
     }else{
-        res.status(401).send("acceso denegado usuario no coincide");
+        res.status(401).json({status: "401",response:"acceso denegado usuario no encontrado"});
     }
     
 });
