@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import bcrypt
 import ctypes
+import  base64
 app = Flask(__name__)
 
 lib =ctypes.CDLL('./libhello.so')
@@ -17,6 +18,11 @@ default_user={
     "password": "$2b$10$4VaJV0rjgtg6/AxbGuZkgeWudjn3RF3GSZNBRx7FDx15Z8EYGcNje"
 
 }
+@app.route('/cam', methods=['GET'])
+def getImage():
+    with open("image.jpg", "rb") as image:
+        encoded_string=base64.b64encode(image.read()).decode('utf-8')
+        return jsonify({'image':encoded_string}),200
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
