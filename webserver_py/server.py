@@ -4,7 +4,7 @@ import ctypes
 import  base64
 app = Flask(__name__)
 
-lib =ctypes.CDLL('./libhello.so')
+lib =ctypes.CDLL('/usr/lib/libgpio.so')
 
 @app.after_request
 def after_request(response):
@@ -23,11 +23,16 @@ def encryptar(password):
     hash_object.update(password_bytes)
     hashed_password = hash_object.hexdigest()
     return hashed_password
+
+
 @app.route('/cam', methods=['GET'])
 def getImage():
-    with open("image.jpg", "rb") as image:
+    lib.take_picture()
+    with open("/images/latest_image.jpg", "rb") as image:
         encoded_string=base64.b64encode(image.read()).decode('utf-8')
         return jsonify({'image':encoded_string}),200
+    
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -43,22 +48,50 @@ def login():
 
 @app.route('/lights', methods=['GET', 'POST'])
 def lights():
-    if request.method == 'GET':
+    if request.method == 'GET': #del 1 al 5 son las luces 
         print("luces")
     elif request.method == 'POST':
         print(request.get_json())
+        led = request.get_json()['id']
+        val = request.get_json()['value']
+        lib.digitalWrite(led, val)
     return '', 200
 
 @app.route('/doors', methods=['GET'])
 def doors():
-    lib.hello_world()
     print("obtener estado de las puertas")
-    return '', 200
+    #ultimos 4 pines son puertas
+    door_1=lib.digitalRead(5)
+    door_2=lib.digitalRead(6)
+    door_3=lib.digitalRead(13)
+    door_4=lib.digitalRead(19)
+    return jsonify([{'place': 'Frontdoor', 'status': ""+door_1},{'place': 'Backdoor', 'status': ""+door_2},{'place': 'Room1', 'status': ""+door_3},{'place': 'Room 2', 'status': ""+door_4}]), 200
 
-@app.route('/cam', methods=['GET'])
-def cam():
-    print("tomando foto")
-    return '', 200
+
+def init():
+    lib.exportPin(2)
+    lib.exportPin(3)
+    lib.exportPin(4)
+    lib.exportPin(17)
+    lib.exportPin(27)
+    lib.exportPin(5)
+    lib.exportPin(6)
+    lib.exportPin(13)
+    lib.exportPin(19)
+    lib.pinMode(2,1 )
+    lib.pinMode(3,1 )
+    lib.pinMode(4,1 )
+    lib.pinMode(17,1 )
+    lib.pinMode(27,1 )
+    lib.pinMode(5,0 )
+    lib.pinMode(6,0 )
+    lib.pinMode(13,0 )
+    lib.pinMode(19,0 )
+    lib.digitalWrite(2,1)
+    lib.digitalWrite(3,1)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
+    init()
+    
