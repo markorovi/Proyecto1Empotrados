@@ -24,7 +24,7 @@
                     <tr *ngFor="let light of lights; let i = index">
                         <td>{{light.place}}</td>
                         <td>{{light.status}}</td>
-                        <td><a id="button" class="btn btn-primary btn-sm "  role="button" (click)="changelights(i)">Turn On </a></td>
+                        <td><a id="button" class="btn btn-primary btn-sm "  role="button" (click)="getCorrectIndex(i)">Turn On </a></td>
                     </tr>
                 </tbody>
               </table>

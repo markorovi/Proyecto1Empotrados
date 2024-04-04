@@ -1,0 +1,11 @@
+[Unit]
+Description=Servidor de control para la Smart House
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/root/.webserver/server.py
+
+[Install]
+WantedBy=multi-user.target
+

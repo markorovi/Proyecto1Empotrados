@@ -28,7 +28,7 @@ def encryptar(password):
 @app.route('/cam', methods=['GET'])
 def getImage():
     lib.take_picture()
-    with open("/images/latest_image.jpg", "rb") as image:
+    with open("/home/root/images/latest_image.jpg", "rb") as image:
         encoded_string=base64.b64encode(image.read()).decode('utf-8')
         return jsonify({'image':encoded_string}),200
     
@@ -65,10 +65,11 @@ def doors():
     door_2=lib.digitalRead(6)
     door_3=lib.digitalRead(13)
     door_4=lib.digitalRead(19)
-    return jsonify([{'place': 'Frontdoor', 'status': ""+door_1},{'place': 'Backdoor', 'status': ""+door_2},{'place': 'Room1', 'status': ""+door_3},{'place': 'Room 2', 'status': ""+door_4}]), 200
+    return jsonify([{'place': 'Frontdoor', 'status': ""+str(door_1)},{'place': 'Backdoor', 'status': ""+str(door_2)},{'place': 'Frontdoor', 'status': ""+str(door_3)},{'place': 'Room 2', 'status': ""+str(door_4)}]), 200
 
 
 def init():
+
     lib.exportPin(2)
     lib.exportPin(3)
     lib.exportPin(4)
@@ -78,20 +79,24 @@ def init():
     lib.exportPin(6)
     lib.exportPin(13)
     lib.exportPin(19)
-    lib.pinMode(2,1 )
-    lib.pinMode(3,1 )
-    lib.pinMode(4,1 )
-    lib.pinMode(17,1 )
-    lib.pinMode(27,1 )
-    lib.pinMode(5,0 )
-    lib.pinMode(6,0 )
-    lib.pinMode(13,0 )
-    lib.pinMode(19,0 )
-    lib.digitalWrite(2,1)
-    lib.digitalWrite(3,1)
+    
+    lib.pinMode(2,1)
+    lib.pinMode(3,1)
+    lib.pinMode(4,1)
+    lib.pinMode(17,1)
+    lib.pinMode(27,1)
+    lib.pinMode(5,0)
+    lib.pinMode(6,0)
+    lib.pinMode(13,0)
+    lib.pinMode(19,0)
+    
+    print('Pines exportados y configurados')
+    
+    app.run(host='0.0.0.0', port=3000)
+    
+    print('Servidor inicializado')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000)
     init()
     

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LightsInterface } from '../models/lights-interface';
+import { LightsManagementInterface } from '../models/lights-management-interface';
 import { DoorsInterface } from '../models/doors-interface';
 import { WebserviceService } from '../services/webservice.service';
 import { Router } from '@angular/router';
@@ -12,14 +13,17 @@ import { Router } from '@angular/router';
 export class LightsComponent implements OnInit {
   lights:LightsInterface[];
   doors:DoorsInterface[];
+  form: LightsManagementInterface;
 
   constructor(private webService:WebserviceService, private router:Router){
+  
     this.lights=[];
     this.doors=[];
-  };
+    this.form = {id: 0, value: 0};
+  }
   
-
-
+  
+ 
   ngOnInit(): void {
     this.doors=[
       {
@@ -90,10 +94,15 @@ export class LightsComponent implements OnInit {
   changelights(i:number, pin:number){
     if (this.lights[i].status=="off"){
       this.lights[i].status="on";
-      this.webService.change_light({'id':pin, 'value':1})
+      this.form.id = pin;
+      this.form.value = 1;
     }else{
       this.lights[i].status="off";
-      this.webService.change_light({'id':pin, 'value':0})
+      this.form.id = pin;
+      this.form.value = 0;
     }
+      console.log(this.form);
+      this.webService.change_light(this.form);
   }
 }
+
